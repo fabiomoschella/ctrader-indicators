@@ -1,0 +1,204 @@
+[
+  {
+    "Flags": "Indicator",
+    "Guid": "00000000-0000-0000-0000-000000000000",
+    "Group": "Custom",
+    "FriendlyName": "VWAPStdDevBands",
+    "ShortName": null,
+    "TypeName": "cAlgo.Indicators.VWAPStdDevBands",
+    "AssemblyName": "VWAPStdDevBands, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "TimeZone": "UTC",
+    "IsOverlay": true,
+    "IsPercentage": false,
+    "ScalePrecision": null,
+    "Levels": [],
+    "DefaultSymbolName": null,
+    "DefaultTimeFrame": null,
+    "Video": null,
+    "Lines": [
+      {
+        "Name": "VWAP",
+        "Style": "Solid",
+        "PlotType": "Line",
+        "Thickness": 2.0,
+        "Color": "#FFFFFFFF",
+        "PropertyName": "VWAP",
+        "IsUsedInAutoScale": true,
+        "IsColorCustomizable": true,
+        "IsLastValueVisibleInTitle": true,
+        "Description": ""
+      },
+      {
+        "Name": "S1 Upper",
+        "Style": "Solid",
+        "PlotType": "Line",
+        "Thickness": 1.0,
+        "Color": "#00BFFFFF",
+        "PropertyName": "S1Upper",
+        "IsUsedInAutoScale": true,
+        "IsColorCustomizable": true,
+        "IsLastValueVisibleInTitle": true,
+        "Description": ""
+      },
+      {
+        "Name": "S1 Lower",
+        "Style": "Solid",
+        "PlotType": "Line",
+        "Thickness": 1.0,
+        "Color": "#00BFFFFF",
+        "PropertyName": "S1Lower",
+        "IsUsedInAutoScale": true,
+        "IsColorCustomizable": true,
+        "IsLastValueVisibleInTitle": true,
+        "Description": ""
+      },
+      {
+        "Name": "S2 Upper",
+        "Style": "Solid",
+        "PlotType": "Line",
+        "Thickness": 1.0,
+        "Color": "#FFA500FF",
+        "PropertyName": "S2Upper",
+        "IsUsedInAutoScale": true,
+        "IsColorCustomizable": true,
+        "IsLastValueVisibleInTitle": true,
+        "Description": ""
+      },
+      {
+        "Name": "S2 Lower",
+        "Style": "Solid",
+        "PlotType": "Line",
+        "Thickness": 1.0,
+        "Color": "#FFA500FF",
+        "PropertyName": "S2Lower",
+        "IsUsedInAutoScale": true,
+        "IsColorCustomizable": true,
+        "IsLastValueVisibleInTitle": true,
+        "Description": ""
+      },
+      {
+        "Name": "S3 Upper",
+        "Style": "Solid",
+        "PlotType": "Line",
+        "Thickness": 1.0,
+        "Color": "#FF0000FF",
+        "PropertyName": "S3Upper",
+        "IsUsedInAutoScale": true,
+        "IsColorCustomizable": true,
+        "IsLastValueVisibleInTitle": true,
+        "Description": ""
+      },
+      {
+        "Name": "S3 Lower",
+        "Style": "Solid",
+        "PlotType": "Line",
+        "Thickness": 1.0,
+        "Color": "#FF0000FF",
+        "PropertyName": "S3Lower",
+        "IsUsedInAutoScale": true,
+        "IsColorCustomizable": true,
+        "IsLastValueVisibleInTitle": true,
+        "Description": ""
+      }
+    ],
+    "Clouds": [],
+    "Parameters": [
+      {
+        "MinValue": 0.1,
+        "MaxValue": 1.7976931348623157E+308,
+        "Step": 0.1,
+        "DefaultValue": 1.0,
+        "ParameterType": "Double",
+        "PropertyName": "S1Multiplier",
+        "FriendlyName": "S1 Multiplier",
+        "GroupName": null,
+        "IsValueVisibleInTitle": true,
+        "Description": ""
+      },
+      {
+        "MinValue": 0.1,
+        "MaxValue": 1.7976931348623157E+308,
+        "Step": 0.1,
+        "DefaultValue": 2.0,
+        "ParameterType": "Double",
+        "PropertyName": "S2Multiplier",
+        "FriendlyName": "S2 Multiplier",
+        "GroupName": null,
+        "IsValueVisibleInTitle": true,
+        "Description": ""
+      },
+      {
+        "MinValue": 0.1,
+        "MaxValue": 1.7976931348623157E+308,
+        "Step": 0.1,
+        "DefaultValue": 3.0,
+        "ParameterType": "Double",
+        "PropertyName": "S3Multiplier",
+        "FriendlyName": "S3 Multiplier",
+        "GroupName": null,
+        "IsValueVisibleInTitle": true,
+        "Description": ""
+      },
+      {
+        "DefaultValue": true,
+        "ParameterType": "Boolean",
+        "PropertyName": "ShowVWAP",
+        "FriendlyName": "Show VWAP",
+        "GroupName": null,
+        "IsValueVisibleInTitle": true,
+        "Description": ""
+      },
+      {
+        "DefaultValue": true,
+        "ParameterType": "Boolean",
+        "PropertyName": "ShowS1",
+        "FriendlyName": "Show S1 Bands",
+        "GroupName": null,
+        "IsValueVisibleInTitle": true,
+        "Description": ""
+      },
+      {
+        "DefaultValue": true,
+        "ParameterType": "Boolean",
+        "PropertyName": "ShowS2",
+        "FriendlyName": "Show S2 Bands",
+        "GroupName": null,
+        "IsValueVisibleInTitle": true,
+        "Description": ""
+      },
+      {
+        "DefaultValue": false,
+        "ParameterType": "Boolean",
+        "PropertyName": "ShowS3",
+        "FriendlyName": "Show S3 Bands",
+        "GroupName": null,
+        "IsValueVisibleInTitle": true,
+        "Description": ""
+      },
+      {
+        "EnumValues": {
+          "TypicalPrice": 0,
+          "Close": 1,
+          "Open": 2,
+          "High": 3,
+          "Low": 4,
+          "Median": 5,
+          "Weighted": 6
+        },
+        "DefaultValue": 0,
+        "ParameterType": "Enum",
+        "PropertyName": "PriceSource",
+        "FriendlyName": "Price Source",
+        "GroupName": null,
+        "IsValueVisibleInTitle": true,
+        "Description": ""
+      }
+    ],
+    "Capabilities": [],
+    "CustomAttributes": [],
+    "Sets": [],
+    "AddIndicatorsToChart": false,
+    "AdditionalInfoUrl": null,
+    "Bars": []
+  }
+]

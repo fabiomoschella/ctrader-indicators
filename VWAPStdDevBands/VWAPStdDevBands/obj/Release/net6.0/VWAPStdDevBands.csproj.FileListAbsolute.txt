@@ -1,0 +1,13 @@
+/mnt/c/Users/Administrator/Documents/cAlgo/Sources/Indicators/VWAPStdDevBands/VWAPStdDevBands/bin/Release/net6.0/VWAPStdDevBands.deps.json
+/mnt/c/Users/Administrator/Documents/cAlgo/Sources/Indicators/VWAPStdDevBands/VWAPStdDevBands/bin/Release/net6.0/VWAPStdDevBands.dll
+/mnt/c/Users/Administrator/Documents/cAlgo/Sources/Indicators/VWAPStdDevBands/VWAPStdDevBands/bin/Release/net6.0/VWAPStdDevBands.pdb
+/mnt/c/Users/Administrator/Documents/cAlgo/Sources/Indicators/VWAPStdDevBands/VWAPStdDevBands/obj/Release/net6.0/VWAPStdDevBands.csproj.AssemblyReference.cache
+/mnt/c/Users/Administrator/Documents/cAlgo/Sources/Indicators/VWAPStdDevBands/VWAPStdDevBands/obj/Release/net6.0/VWAPStdDevBands.GeneratedMSBuildEditorConfig.editorconfig
+/mnt/c/Users/Administrator/Documents/cAlgo/Sources/Indicators/VWAPStdDevBands/VWAPStdDevBands/obj/Release/net6.0/VWAPStdDevBands.AssemblyInfoInputs.cache
+/mnt/c/Users/Administrator/Documents/cAlgo/Sources/Indicators/VWAPStdDevBands/VWAPStdDevBands/obj/Release/net6.0/VWAPStdDevBands.AssemblyInfo.cs
+/mnt/c/Users/Administrator/Documents/cAlgo/Sources/Indicators/VWAPStdDevBands/VWAPStdDevBands/obj/Release/net6.0/VWAPStdDevBands.csproj.CoreCompileInputs.cache
+/mnt/c/Users/Administrator/Documents/cAlgo/Sources/Indicators/VWAPStdDevBands/VWAPStdDevBands/obj/Release/net6.0/VWAPStdDevBands.sourcelink.json
+/mnt/c/Users/Administrator/Documents/cAlgo/Sources/Indicators/VWAPStdDevBands/VWAPStdDevBands/obj/Release/net6.0/VWAPStdDevBands.dll
+/mnt/c/Users/Administrator/Documents/cAlgo/Sources/Indicators/VWAPStdDevBands/VWAPStdDevBands/obj/Release/net6.0/refint/VWAPStdDevBands.dll
+/mnt/c/Users/Administrator/Documents/cAlgo/Sources/Indicators/VWAPStdDevBands/VWAPStdDevBands/obj/Release/net6.0/VWAPStdDevBands.pdb
+/mnt/c/Users/Administrator/Documents/cAlgo/Sources/Indicators/VWAPStdDevBands/VWAPStdDevBands/obj/Release/net6.0/ref/VWAPStdDevBands.dll

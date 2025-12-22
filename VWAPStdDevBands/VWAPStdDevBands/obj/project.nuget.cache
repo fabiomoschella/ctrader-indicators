@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "6M4kdE7ev5o=",
+  "success": true,
+  "projectFilePath": "/mnt/c/Users/Administrator/Documents/cAlgo/Sources/Indicators/VWAPStdDevBands/VWAPStdDevBands/VWAPStdDevBands.csproj",
+  "expectedPackageFiles": [
+    "/home/fabiomoschella/.nuget/packages/ctrader.automate/1.0.14/ctrader.automate.1.0.14.nupkg.sha512",
+    "/home/fabiomoschella/.nuget/packages/microsoft.netcore.app.ref/6.0.36/microsoft.netcore.app.ref.6.0.36.nupkg.sha512",
+    "/home/fabiomoschella/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.36/microsoft.aspnetcore.app.ref.6.0.36.nupkg.sha512"
+  ],
+  "logs": []
+}
