@@ -1,0 +1,12 @@
+C:\Users\fabio\OneDrive\Documenti\cAlgo\Sources\Indicators\PivotPointsStandard\PivotPointsStandard\bin\Debug\net6.0\PivotPointsStandard.deps.json
+C:\Users\fabio\OneDrive\Documenti\cAlgo\Sources\Indicators\PivotPointsStandard\PivotPointsStandard\bin\Debug\net6.0\PivotPointsStandard.dll
+C:\Users\fabio\OneDrive\Documenti\cAlgo\Sources\Indicators\PivotPointsStandard\PivotPointsStandard\bin\Debug\net6.0\PivotPointsStandard.pdb
+C:\Users\fabio\OneDrive\Documenti\cAlgo\Sources\Indicators\PivotPointsStandard\PivotPointsStandard\obj\Debug\net6.0\PivotPointsStandard.csproj.AssemblyReference.cache
+C:\Users\fabio\OneDrive\Documenti\cAlgo\Sources\Indicators\PivotPointsStandard\PivotPointsStandard\obj\Debug\net6.0\PivotPointsStandard.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\fabio\OneDrive\Documenti\cAlgo\Sources\Indicators\PivotPointsStandard\PivotPointsStandard\obj\Debug\net6.0\PivotPointsStandard.AssemblyInfoInputs.cache
+C:\Users\fabio\OneDrive\Documenti\cAlgo\Sources\Indicators\PivotPointsStandard\PivotPointsStandard\obj\Debug\net6.0\PivotPointsStandard.AssemblyInfo.cs
+C:\Users\fabio\OneDrive\Documenti\cAlgo\Sources\Indicators\PivotPointsStandard\PivotPointsStandard\obj\Debug\net6.0\PivotPointsStandard.csproj.CoreCompileInputs.cache
+C:\Users\fabio\OneDrive\Documenti\cAlgo\Sources\Indicators\PivotPointsStandard\PivotPointsStandard\obj\Debug\net6.0\PivotPointsStandard.dll
+C:\Users\fabio\OneDrive\Documenti\cAlgo\Sources\Indicators\PivotPointsStandard\PivotPointsStandard\obj\Debug\net6.0\refint\PivotPointsStandard.dll
+C:\Users\fabio\OneDrive\Documenti\cAlgo\Sources\Indicators\PivotPointsStandard\PivotPointsStandard\obj\Debug\net6.0\PivotPointsStandard.pdb
+C:\Users\fabio\OneDrive\Documenti\cAlgo\Sources\Indicators\PivotPointsStandard\PivotPointsStandard\obj\Debug\net6.0\ref\PivotPointsStandard.dll
