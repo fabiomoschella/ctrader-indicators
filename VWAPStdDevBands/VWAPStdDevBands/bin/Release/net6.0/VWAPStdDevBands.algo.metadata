@@ -149,7 +149,7 @@
         "Description": ""
       },
       {
-        "DefaultValue": true,
+        "DefaultValue": false,
         "ParameterType": "Boolean",
         "PropertyName": "ShowS1",
         "FriendlyName": "Show S1 Bands",
@@ -158,7 +158,7 @@
         "Description": ""
       },
       {
-        "DefaultValue": true,
+        "DefaultValue": false,
         "ParameterType": "Boolean",
         "PropertyName": "ShowS2",
         "FriendlyName": "Show S2 Bands",
@@ -185,7 +185,7 @@
           "Median": 5,
           "Weighted": 6
         },
-        "DefaultValue": 0,
+        "DefaultValue": 1,
         "ParameterType": "Enum",
         "PropertyName": "PriceSource",
         "FriendlyName": "Price Source",

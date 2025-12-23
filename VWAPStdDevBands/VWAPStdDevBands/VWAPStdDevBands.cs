@@ -25,17 +25,17 @@ namespace cAlgo.Indicators
         [Parameter("Show VWAP", DefaultValue = true)]
         public bool ShowVWAP { get; set; }
 
-        [Parameter("Show S1 Bands", DefaultValue = true)]
+        [Parameter("Show S1 Bands", DefaultValue = false)]
         public bool ShowS1 { get; set; }
 
-        [Parameter("Show S2 Bands", DefaultValue = true)]
+        [Parameter("Show S2 Bands", DefaultValue = false)]
         public bool ShowS2 { get; set; }
 
         [Parameter("Show S3 Bands", DefaultValue = false)]
         public bool ShowS3 { get; set; }
 
         // Price source for deviation calculation
-        [Parameter("Price Source", DefaultValue = PriceSourceType.TypicalPrice)]
+        [Parameter("Price Source", DefaultValue = PriceSourceType.Close)]
         public PriceSourceType PriceSource { get; set; }
 
         // ========== OUTPUTS ==========

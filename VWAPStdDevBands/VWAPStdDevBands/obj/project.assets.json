@@ -5,14 +5,10 @@
       "cTrader.Automate/1.0.14": {
         "type": "package",
         "compile": {
-          "lib/net6.0/cAlgo.API.dll": {
-            "related": ".xml"
-          }
+          "lib/net6.0/cAlgo.API.dll": {}
         },
         "runtime": {
-          "lib/net6.0/cAlgo.API.dll": {
-            "related": ".xml"
-          }
+          "lib/net6.0/cAlgo.API.dll": {}
         },
         "build": {
           "build/cTrader.Automate.props": {},
@@ -80,19 +76,19 @@
     ]
   },
   "packageFolders": {
-    "/home/fabiomoschella/.nuget/packages/": {}
+    "C:\\Users\\fabio\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/mnt/c/Users/Administrator/Documents/cAlgo/Sources/Indicators/VWAPStdDevBands/VWAPStdDevBands/VWAPStdDevBands.csproj",
+      "projectUniqueName": "C:\\Users\\fabio\\OneDrive\\Documenti\\cAlgo\\Sources\\Indicators\\VWAPStdDevBands\\VWAPStdDevBands\\VWAPStdDevBands.csproj",
       "projectName": "VWAPStdDevBands",
-      "projectPath": "/mnt/c/Users/Administrator/Documents/cAlgo/Sources/Indicators/VWAPStdDevBands/VWAPStdDevBands/VWAPStdDevBands.csproj",
-      "packagesPath": "/home/fabiomoschella/.nuget/packages/",
-      "outputPath": "/mnt/c/Users/Administrator/Documents/cAlgo/Sources/Indicators/VWAPStdDevBands/VWAPStdDevBands/obj/",
+      "projectPath": "C:\\Users\\fabio\\OneDrive\\Documenti\\cAlgo\\Sources\\Indicators\\VWAPStdDevBands\\VWAPStdDevBands\\VWAPStdDevBands.csproj",
+      "packagesPath": "C:\\Users\\fabio\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\fabio\\OneDrive\\Documenti\\cAlgo\\Sources\\Indicators\\VWAPStdDevBands\\VWAPStdDevBands\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/fabiomoschella/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\fabio\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
@@ -110,11 +106,6 @@
         "warnAsError": [
           "NU1605"
         ]
-      },
-      "restoreAuditProperties": {
-        "enableAudit": "true",
-        "auditLevel": "low",
-        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -132,27 +123,16 @@
           "net47",
           "net471",
           "net472",
-          "net48",
-          "net481"
+          "net48"
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[6.0.36, 6.0.36]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Ref",
-            "version": "[6.0.36, 6.0.36]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.414/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -1,0 +1,4 @@
+C:\Users\fabio\OneDrive\Documenti\cAlgo\Sources\Indicators\ZigZagExt\ZigZagExt\bin\Release\net6.0\publish\ZigZagExt.dll
+C:\Users\fabio\OneDrive\Documenti\cAlgo\Sources\Indicators\ZigZagExt\ZigZagExt\bin\Release\net6.0\publish\ZigZagExt.deps.json
+C:\Users\fabio\OneDrive\Documenti\cAlgo\Sources\Indicators\ZigZagExt\ZigZagExt\bin\Release\net6.0\publish\ZigZagExt.pdb
+C:\Users\fabio\OneDrive\Documenti\cAlgo\Sources\Indicators\ZigZagExt\ZigZagExt\bin\Release\net6.0\publish\cAlgo.API.dll

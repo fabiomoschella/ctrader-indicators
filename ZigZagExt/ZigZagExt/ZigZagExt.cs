@@ -191,7 +191,7 @@ namespace ZigZagExt
 
             }
 
-            if (ShowLabel)
+            if (ShowLabel && Chart != null)
             {
 
                 if (_highZigZags[index] > 0)
