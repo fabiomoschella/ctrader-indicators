@@ -2,25 +2,23 @@ using System;
 using cAlgo.API;
 using cAlgo.API.Indicators;
 
-
-
 namespace cAlgo.Indicators
 {
     [Indicator(IsOverlay = true, TimeZone = TimeZones.UTC, AccessRights = AccessRights.None)]
     public class VWAPStdDevBands : Indicator
     {
         // ========== PARAMETERS ==========
-        
+
         // Standard Deviation multipliers
         [Parameter("S1 Multiplier", DefaultValue = 1.0, MinValue = 0.1, Step = 0.1)]
         public double S1Multiplier { get; set; }
-        
+
         [Parameter("S2 Multiplier", DefaultValue = 2.0, MinValue = 0.1, Step = 0.1)]
         public double S2Multiplier { get; set; }
-        
+
         [Parameter("S3 Multiplier", DefaultValue = 3.0, MinValue = 0.1, Step = 0.1)]
         public double S3Multiplier { get; set; }
-        
+
         // Show/Hide bands
         [Parameter("Show VWAP", DefaultValue = true)]
         public bool ShowVWAP { get; set; }
@@ -42,89 +40,142 @@ namespace cAlgo.Indicators
 
         [Output("VWAP", LineColor = "White", PlotType = PlotType.Line, Thickness = 2)]
         public IndicatorDataSeries VWAP { get; set; }
-        
+
         [Output("S1 Upper", LineColor = "DeepSkyBlue", PlotType = PlotType.Line, Thickness = 1)]
         public IndicatorDataSeries S1Upper { get; set; }
-        
+
         [Output("S1 Lower", LineColor = "DeepSkyBlue", PlotType = PlotType.Line, Thickness = 1)]
         public IndicatorDataSeries S1Lower { get; set; }
-        
+
         [Output("S2 Upper", LineColor = "Orange", PlotType = PlotType.Line, Thickness = 1)]
         public IndicatorDataSeries S2Upper { get; set; }
-        
+
         [Output("S2 Lower", LineColor = "Orange", PlotType = PlotType.Line, Thickness = 1)]
         public IndicatorDataSeries S2Lower { get; set; }
-        
+
         [Output("S3 Upper", LineColor = "Red", PlotType = PlotType.Line, Thickness = 1)]
         public IndicatorDataSeries S3Upper { get; set; }
-        
+
         [Output("S3 Lower", LineColor = "Red", PlotType = PlotType.Line, Thickness = 1)]
         public IndicatorDataSeries S3Lower { get; set; }
-        
+
         // ========== PRIVATE VARIABLES ==========
 
-        private TypicalPrice _typicalPrice;
-
-        // Caching variables for incremental calculation
+        // Incremental VWAP state
         private DateTime _currentDay;
-        private double _cumulativeTPV;    // Cumulative Typical Price × Volume
+        private double _cumulativeTPV;      // Cumulative (TypicalPrice × Volume)
         private double _cumulativeVolume;
         private int _dayStartIndex;
 
-        // Store daily prices for std dev calculation (much lighter than recalculating)
-        private System.Collections.Generic.List<double> _dailyPrices;
+        // Incremental Std Dev state (avoids re-iterating all daily bars)
+        private double _cumulativeSumSqDiff; // Σ (price - vwap_at_that_time)² — recalculated on day boundary
+        private int _dayBarCount;            // Number of bars accumulated today
+
+        // Guards against redundant recalculation on same tick
+        private int _lastCalculatedIndex = -1;
 
         // ========== INITIALIZE ==========
-        
+
         protected override void Initialize()
         {
-            // Initialize typical price indicator
-            _typicalPrice = Indicators.TypicalPrice();
-
-            // Initialize caching variables
             _currentDay = DateTime.MinValue;
             _cumulativeTPV = 0;
             _cumulativeVolume = 0;
             _dayStartIndex = 0;
-            _dailyPrices = new System.Collections.Generic.List<double>();
-
-            Print("VWAPStdDevBands initialized successfully");
-            Print("Using optimized incremental VWAP calculation with daily reset");
+            _cumulativeSumSqDiff = 0;
+            _dayBarCount = 0;
+            _lastCalculatedIndex = -1;
         }
-        
+
         // ========== CALCULATE ==========
-        
+
         public override void Calculate(int index)
         {
-            // Skip if not enough data
             if (index < 1)
                 return;
 
             DateTime barDay = Bars.OpenTimes[index].Date;
 
-            // Detect new day and reset cumulative values
+            // --- Handle out-of-sequence access (scrolling back in history) ---
+            // If cTrader requests a bar earlier than we expect, do a full recalc for that day.
+            if (index < _dayStartIndex || barDay < _currentDay)
+            {
+                FullRecalculate(index);
+                return;
+            }
+
+            // --- Same tick update: the last bar is being refreshed (price changed) ---
+            // Recalculate only the current bar from scratch within the day.
+            if (index == _lastCalculatedIndex && barDay == _currentDay)
+            {
+                RecalculateCurrentBar(index);
+                return;
+            }
+
+            // --- New day detected: reset all accumulators ---
             if (barDay != _currentDay)
             {
                 _currentDay = barDay;
                 _cumulativeTPV = 0;
                 _cumulativeVolume = 0;
                 _dayStartIndex = index;
-                _dailyPrices.Clear();
+                _cumulativeSumSqDiff = 0;
+                _dayBarCount = 0;
             }
 
-            // Calculate typical price and volume for current bar
-            double typicalPrice = (Bars.HighPrices[index] + Bars.LowPrices[index] + Bars.ClosePrices[index]) / 3;
+            // --- Normal incremental path (new bar in sequence) ---
+            double typicalPrice = (Bars.HighPrices[index] + Bars.LowPrices[index] + Bars.ClosePrices[index]) / 3.0;
             double volume = Bars.TickVolumes[index];
 
-            // Update cumulative values incrementally (O(1) operation)
             _cumulativeTPV += typicalPrice * volume;
             _cumulativeVolume += volume;
+            _dayBarCount++;
 
-            // Store price for std dev calculation
-            double priceForStdDev = GetPriceValue(index);
-            _dailyPrices.Add(priceForStdDev);
+            if (_cumulativeVolume == 0)
+            {
+                SetNaNValues(index);
+                _lastCalculatedIndex = index;
+                return;
+            }
 
-            // Calculate VWAP from cached cumulative values
+            double vwap = _cumulativeTPV / _cumulativeVolume;
+
+            // Incremental sum-of-squared-differences for std dev
+            double price = GetPriceValue(index);
+            double diff = price - vwap;
+            _cumulativeSumSqDiff += diff * diff;
+
+            SetOutputValues(index, vwap, _cumulativeSumSqDiff, _dayBarCount);
+            _lastCalculatedIndex = index;
+        }
+
+        // ========== RECALCULATION METHODS ==========
+
+        /// <summary>
+        /// Recalculates the last bar of the current day when the same index is
+        /// requested again (tick update). Avoids a full day scan by subtracting
+        /// the previous contribution and adding the updated one.
+        /// </summary>
+        private void RecalculateCurrentBar(int index)
+        {
+            // Full recalculate from day start is the safest approach for a same-bar update
+            // because volume and price may have changed, affecting VWAP and therefore all stddev.
+            // But we limit the recalc to only today's bars (small set).
+            _cumulativeTPV = 0;
+            _cumulativeVolume = 0;
+            _cumulativeSumSqDiff = 0;
+            _dayBarCount = 0;
+
+            // First pass: compute VWAP up to current index
+            for (int i = _dayStartIndex; i <= index; i++)
+            {
+                double tp = (Bars.HighPrices[i] + Bars.LowPrices[i] + Bars.ClosePrices[i]) / 3.0;
+                double vol = Bars.TickVolumes[i];
+                _cumulativeTPV += tp * vol;
+                _cumulativeVolume += vol;
+                _dayBarCount++;
+            }
+
             if (_cumulativeVolume == 0)
             {
                 SetNaNValues(index);
@@ -133,20 +184,83 @@ namespace cAlgo.Indicators
 
             double vwap = _cumulativeTPV / _cumulativeVolume;
 
-            // Set VWAP value
-            if (ShowVWAP)
-                VWAP[index] = vwap;
-            else
-                VWAP[index] = double.NaN;
+            // Second pass: compute std dev against final VWAP
+            for (int i = _dayStartIndex; i <= index; i++)
+            {
+                double price = GetPriceValue(i);
+                double d = price - vwap;
+                _cumulativeSumSqDiff += d * d;
+            }
 
-            // Calculate standard deviation using only daily prices list (much faster)
-            double stdDev = CalculateStandardDeviationOptimized(vwap);
+            SetOutputValues(index, vwap, _cumulativeSumSqDiff, _dayBarCount);
+        }
 
-            // Calculate and set band values
+        /// <summary>
+        /// Full recalculation from the beginning of the day containing <paramref name="index"/>.
+        /// Used when bars are requested out of sequence (e.g., scrolling back in history).
+        /// </summary>
+        private void FullRecalculate(int index)
+        {
+            DateTime targetDay = Bars.OpenTimes[index].Date;
+
+            // Find the first bar of this day
+            int start = index;
+            while (start > 0 && Bars.OpenTimes[start - 1].Date == targetDay)
+                start--;
+
+            _currentDay = targetDay;
+            _dayStartIndex = start;
+            _cumulativeTPV = 0;
+            _cumulativeVolume = 0;
+            _cumulativeSumSqDiff = 0;
+            _dayBarCount = 0;
+
+            // First pass: compute VWAP
+            for (int i = start; i <= index; i++)
+            {
+                double tp = (Bars.HighPrices[i] + Bars.LowPrices[i] + Bars.ClosePrices[i]) / 3.0;
+                double vol = Bars.TickVolumes[i];
+                _cumulativeTPV += tp * vol;
+                _cumulativeVolume += vol;
+                _dayBarCount++;
+            }
+
+            if (_cumulativeVolume == 0)
+            {
+                SetNaNValues(index);
+                _lastCalculatedIndex = index;
+                return;
+            }
+
+            double vwap = _cumulativeTPV / _cumulativeVolume;
+
+            // Second pass: std dev
+            for (int i = start; i <= index; i++)
+            {
+                double price = GetPriceValue(i);
+                double d = price - vwap;
+                _cumulativeSumSqDiff += d * d;
+            }
+
+            SetOutputValues(index, vwap, _cumulativeSumSqDiff, _dayBarCount);
+            _lastCalculatedIndex = index;
+        }
+
+        // ========== HELPER METHODS ==========
+
+        /// <summary>
+        /// Sets all output series values for the given index.
+        /// </summary>
+        private void SetOutputValues(int index, double vwap, double sumSqDiff, int count)
+        {
+            VWAP[index] = ShowVWAP ? vwap : double.NaN;
+
+            double stdDev = count > 0 ? Math.Sqrt(sumSqDiff / count) : 0;
+
             if (ShowS1)
             {
-                S1Upper[index] = vwap + (S1Multiplier * stdDev);
-                S1Lower[index] = vwap - (S1Multiplier * stdDev);
+                S1Upper[index] = vwap + S1Multiplier * stdDev;
+                S1Lower[index] = vwap - S1Multiplier * stdDev;
             }
             else
             {
@@ -156,8 +270,8 @@ namespace cAlgo.Indicators
 
             if (ShowS2)
             {
-                S2Upper[index] = vwap + (S2Multiplier * stdDev);
-                S2Lower[index] = vwap - (S2Multiplier * stdDev);
+                S2Upper[index] = vwap + S2Multiplier * stdDev;
+                S2Lower[index] = vwap - S2Multiplier * stdDev;
             }
             else
             {
@@ -167,8 +281,8 @@ namespace cAlgo.Indicators
 
             if (ShowS3)
             {
-                S3Upper[index] = vwap + (S3Multiplier * stdDev);
-                S3Lower[index] = vwap - (S3Multiplier * stdDev);
+                S3Upper[index] = vwap + S3Multiplier * stdDev;
+                S3Lower[index] = vwap - S3Multiplier * stdDev;
             }
             else
             {
@@ -176,15 +290,11 @@ namespace cAlgo.Indicators
                 S3Lower[index] = double.NaN;
             }
         }
-        
-        // ========== HELPER METHODS ==========
-        
+
         private double GetPriceValue(int index)
         {
             switch (PriceSource)
             {
-                case PriceSourceType.TypicalPrice:
-                    return _typicalPrice.Result[index];
                 case PriceSourceType.Close:
                     return Bars.ClosePrices[index];
                 case PriceSourceType.Open:
@@ -194,36 +304,15 @@ namespace cAlgo.Indicators
                 case PriceSourceType.Low:
                     return Bars.LowPrices[index];
                 case PriceSourceType.Median:
-                    return (Bars.HighPrices[index] + Bars.LowPrices[index]) / 2;
+                    return (Bars.HighPrices[index] + Bars.LowPrices[index]) / 2.0;
                 case PriceSourceType.Weighted:
-                    return (Bars.HighPrices[index] + Bars.LowPrices[index] + 2 * Bars.ClosePrices[index]) / 4;
+                    return (Bars.HighPrices[index] + Bars.LowPrices[index] + 2.0 * Bars.ClosePrices[index]) / 4.0;
+                case PriceSourceType.TypicalPrice:
                 default:
-                    return _typicalPrice.Result[index];
+                    return (Bars.HighPrices[index] + Bars.LowPrices[index] + Bars.ClosePrices[index]) / 3.0;
             }
         }
 
-        private double CalculateStandardDeviationOptimized(double vwap)
-        {
-            // Optimized: iterate only the daily prices list instead of scanning all historical bars
-            // This reduces complexity from O(n²) to O(n)
-
-            int n = _dailyPrices.Count;
-            if (n <= 0)
-                return 0;
-
-            double sumSquaredDiff = 0;
-
-            // Only iterate through prices collected today (typically hundreds, not thousands)
-            for (int i = 0; i < n; i++)
-            {
-                double diff = _dailyPrices[i] - vwap;
-                sumSquaredDiff += diff * diff;
-            }
-
-            double variance = sumSquaredDiff / n;
-            return Math.Sqrt(variance);
-        }
-        
         private void SetNaNValues(int index)
         {
             VWAP[index] = double.NaN;
@@ -235,9 +324,9 @@ namespace cAlgo.Indicators
             S3Lower[index] = double.NaN;
         }
     }
-    
+
     // ========== ENUMS ==========
-    
+
     public enum PriceSourceType
     {
         TypicalPrice,
@@ -249,3 +338,4 @@ namespace cAlgo.Indicators
         Weighted
     }
 }
+
