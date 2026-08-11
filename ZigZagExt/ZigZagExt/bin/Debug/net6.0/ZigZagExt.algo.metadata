@@ -26,7 +26,8 @@
         "IsUsedInAutoScale": true,
         "IsColorCustomizable": true,
         "IsLastValueVisibleInTitle": true,
-        "Description": ""
+        "Description": "",
+        "IsVisible": true
       }
     ],
     "Clouds": [],
@@ -76,6 +77,15 @@
         "ParameterType": "Integer",
         "PropertyName": "BackStep",
         "FriendlyName": "BackStep",
+        "GroupName": "Params",
+        "IsValueVisibleInTitle": true,
+        "Description": ""
+      },
+      {
+        "DefaultValue": "h1",
+        "ParameterType": "TimeFrame",
+        "PropertyName": "SourceTimeFrame",
+        "FriendlyName": "Source TimeFrame",
         "GroupName": "Params",
         "IsValueVisibleInTitle": true,
         "Description": ""

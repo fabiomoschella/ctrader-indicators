@@ -81,6 +81,15 @@
         "Description": ""
       },
       {
+        "DefaultValue": "h1",
+        "ParameterType": "TimeFrame",
+        "PropertyName": "SourceTimeFrame",
+        "FriendlyName": "Source TimeFrame",
+        "GroupName": "Params",
+        "IsValueVisibleInTitle": true,
+        "Description": ""
+      },
+      {
         "DefaultValue": true,
         "ParameterType": "Boolean",
         "PropertyName": "ShowLabel",

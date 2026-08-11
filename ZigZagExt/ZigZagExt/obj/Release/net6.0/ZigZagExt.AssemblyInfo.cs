@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ZigZagExt")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3639be4976a2fb1e3ff6ab5c7c0c860fd73ae034")]
 [assembly: System.Reflection.AssemblyProductAttribute("ZigZagExt")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ZigZagExt")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -2,13 +2,17 @@
   "version": 3,
   "targets": {
     "net6.0": {
-      "cTrader.Automate/1.0.14": {
+      "cTrader.Automate/1.0.19": {
         "type": "package",
         "compile": {
-          "lib/net6.0/cAlgo.API.dll": {}
+          "lib/net6.0/cAlgo.API.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net6.0/cAlgo.API.dll": {}
+          "lib/net6.0/cAlgo.API.dll": {
+            "related": ".xml"
+          }
         },
         "build": {
           "build/cTrader.Automate.props": {},
@@ -18,17 +22,17 @@
     }
   },
   "libraries": {
-    "cTrader.Automate/1.0.14": {
-      "sha512": "eNwE7WL90MGBKb5MuLAtZLdQy0vxkI5EVhLWAQ9S83EAdYkGAzdccvGFLk2oqmtSGBtD+gEpyrJUW/ej4dI4jw==",
+    "cTrader.Automate/1.0.19": {
+      "sha512": "tw0jMpDLVEYFtemLgYPjNWk2fwyXy31w+ReZnK09eP/6vmoQFNfsLQfuu2a5BXrwPO4R3FI+/Q+RAYOJEspHiQ==",
       "type": "package",
-      "path": "ctrader.automate/1.0.14",
+      "path": "ctrader.automate/1.0.19",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "build/cTrader.Automate.props",
         "build/cTrader.Automate.targets",
-        "ctrader.automate.1.0.14.nupkg.sha512",
+        "ctrader.automate.1.0.19.nupkg.sha512",
         "ctrader.automate.nuspec",
         "eula.md",
         "icon.png",
@@ -76,19 +80,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\fabio\\.nuget\\packages\\": {}
+    "C:\\Users\\Administrator\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\fabio\\OneDrive\\Documenti\\cAlgo\\Sources\\Indicators\\ZigZagExt\\ZigZagExt\\ZigZagExt.csproj",
+      "projectUniqueName": "C:\\Users\\Administrator\\Documents\\cAlgo\\Sources\\Indicators\\ZigZagExt\\ZigZagExt\\ZigZagExt.csproj",
       "projectName": "ZigZagExt",
-      "projectPath": "C:\\Users\\fabio\\OneDrive\\Documenti\\cAlgo\\Sources\\Indicators\\ZigZagExt\\ZigZagExt\\ZigZagExt.csproj",
-      "packagesPath": "C:\\Users\\fabio\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\fabio\\OneDrive\\Documenti\\cAlgo\\Sources\\Indicators\\ZigZagExt\\ZigZagExt\\obj\\",
+      "projectPath": "C:\\Users\\Administrator\\Documents\\cAlgo\\Sources\\Indicators\\ZigZagExt\\ZigZagExt\\ZigZagExt.csproj",
+      "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Administrator\\Documents\\cAlgo\\Sources\\Indicators\\ZigZagExt\\ZigZagExt\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\fabio\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
@@ -106,6 +110,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -123,16 +132,31 @@
           "net47",
           "net471",
           "net472",
-          "net48"
+          "net48",
+          "net481"
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[6.0.36, 6.0.36]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[6.0.36, 6.0.36]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[6.0.36, 6.0.36]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.416\\RuntimeIdentifierGraph.json"
       }
     }
   }
